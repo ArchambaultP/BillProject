@@ -1,0 +1,2 @@
+#ignore compiled python 3 bytecode
+__pycache__/*
