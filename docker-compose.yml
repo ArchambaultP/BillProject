@@ -1,0 +1,40 @@
+version: '3'
+services:
+  mongodb:
+    image: "mongo:latest"
+    container_name: "mongodb"
+    environment:
+      - MONGO_DATA_DIR=/usr/data/db
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
+    command: mongod --port 27017
+
+  frontend:
+    build: ./frontend
+    container_name: "react"
+    #command: npm run start
+    ports:
+      - '3000:3000'
+    volumes:
+      - './frontend:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    environment:
+      NODE_ENV: development
+  backend:
+    build: ./backend
+    container_name: "flask"
+    command: python run.py
+    ports:
+     - "3050:3050"
+    depends_on:
+      - mongodb
+    volumes:
+     - ./backend:/app
+    environment:
+      - ENV=development
+      - PORT=80
+      - DB=mongodb://mongodb:27017/food
+    links:
+      - mongodb

@@ -1,4 +1,3 @@
 #ignore compiled python 3 bytecode
-__pycache__/*
-data/
+app/__pycache__
 
