@@ -14,5 +14,4 @@ RUN npm install --silent
 RUN npm install react-scripts
 RUN npm install axios
 
-EXPOSE 80
 CMD ["npm", "start"]
