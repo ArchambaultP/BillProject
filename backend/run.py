@@ -37,5 +37,19 @@ def add_star():
     output = {'name' : new_star['name'], 'distance' : new_star['distance']}
     return jsonify({'result' : output})
 
+@app.route('/register', methods=['POST'])
+def add_user():
+    user = mongo.db.users
+    username = request.form.get('username')
+    password = request.form.get('password')
+
+    if user.find({'username' : {'$in': [username]}}).count() > 0:
+        return jsonify({'result': 'username exists'}), 422
+    
+    user_id = user.insert({'username': username, 'password': password})
+    new_user = user.find_one({'_id': user_id})
+    output = {'username': new_user['username'], 'password' : new_user['password']}
+    return jsonify({'result' : output})
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3050, debug=True)

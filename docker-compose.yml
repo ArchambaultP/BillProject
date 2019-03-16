@@ -36,6 +36,6 @@ services:
     environment:
       - ENV=development
       - PORT=80
-      - DB=mongodb://mongodb:27017/food
+      - DB=mongodb://mongodb:27017/BillDb
     links:
       - mongodb

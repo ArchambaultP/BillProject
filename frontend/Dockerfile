@@ -13,5 +13,7 @@ COPY package.json /usr/src/app/package.json
 RUN npm install --silent
 RUN npm install react-scripts
 RUN npm install axios
+RUN npm install react-router-dom
+RUN npm install react-bootstrap
 
 CMD ["npm", "start"]

@@ -7,4 +7,6 @@ WORKDIR /app
 
 RUN pip install -r requirements.txt
 
+EXPOSE 3050
+
 CMD ["python", "run.py"]
